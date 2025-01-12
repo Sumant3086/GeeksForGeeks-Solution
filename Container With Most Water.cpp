@@ -66,18 +66,19 @@
 // 24
 // 2
 
-int maxArea(vector<int>& height) {
-    // Write your code here. 
-        int left=0;
-        int right=height.size()-1;
-        int maxArea=0;
-        while(left<right){
-            maxArea=max(maxArea,min(height[left],height[right])*(right-left));
-            if(height[left]<height[right]) {
-                left++;
+int maxWater(vector<int> &arr) {
+        // code here
+        int n=arr.size();
+        int l=0,r=n-1;
+        int ans=0;
+        while(l<r){
+            int water=min(arr[l],arr[r])*(r-l);
+            ans=max(ans,water);
+            if(arr[l]<arr[r]){
+                l++;
             }else{
-                right--;
+                r--;
             }
         }
-        return maxArea;
-}
+        return ans;
+    }
