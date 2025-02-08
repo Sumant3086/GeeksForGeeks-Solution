@@ -59,33 +59,41 @@
 // Expected Complexities
 
 
-void leftB(Node* root,vector<int>& ans){
-        if(!root)return;
-        if(!root->left && !root->right)return;
-        if(root)ans.push_back(root->data);
-        leftB(root->left,ans);
-        if(!root->left && root->right)leftB(root->right,ans);
-    }
-    void rightB(Node* root,vector<int>& ans){
-        if(!root)return;
-        if(!root->left && !root->right)return;
-        rightB(root->right,ans);
-        if(root->left && !root->right)rightB(root->left,ans);
-        if(root)ans.push_back(root->data);
-    }
-    void boundry(Node* root,vector<int>& ans){
-        if(!root)return;
-        if(!root->left && !root->right)ans.push_back(root->data);
-        boundry(root->left,ans);
-        boundry(root->right,ans);
+void helper(Node* root,vector<int>&v){
+        if(root==NULL) return;
+        if(root->left==NULL && root->right==NULL){
+            if(root->data!=-1) v.push_back(root->data);
+            root->data=-1;
+            return;
+        }
+        helper(root->left,v);
+        helper(root->right,v);
     }
     vector<int> boundaryTraversal(Node *root) {
-        // code here
         vector<int>ans;
-        ans.push_back(root->data);
-        if(!root->left && !root->right)return ans;
-        leftB(root->left,ans);
-        boundry(root,ans);
-        leftB(root->right,ans);
+        Node* temp=root;
+        while(temp){
+            ans.push_back(temp->data);
+            temp->data=-1;
+            if(temp->left==NULL && temp!=root) temp=temp->right;
+            else temp=temp->left;
+        }
+        helper(root,ans);
+        int l=ans.size();
+        temp=root;
+        temp=temp->right;
+        while(temp && temp->data!=-1){
+            ans.push_back(temp->data);
+            temp->data=-1;
+            if(temp->right==NULL) temp=temp->left;
+            else temp=temp->right;
+        }
+        if(l>=ans.size()) return ans;
+        int r=ans.size()-1;
+        while(l<r){
+            swap(ans[l],ans[r]);
+            l++;
+            r--;
+        }
         return ans;
     }
