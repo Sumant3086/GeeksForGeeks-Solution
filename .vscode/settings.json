@@ -21,6 +21,9 @@
         "regex": "cpp",
         "tuple": "cpp",
         "valarray": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "chrono": "cpp",
+        "random": "cpp",
+        "limits": "cpp"
     }
 }
