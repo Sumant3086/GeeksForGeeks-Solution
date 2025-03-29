@@ -69,7 +69,6 @@ int solve(int i, int j, bool isT, string &s,
     }
   
     int countWays(string &s) {
-        // code here
         int n=s.length();
         vector<vector<vector<int>>>dp(n, vector<vector<int>>(n, vector<int>(2, -1)));
         return solve(0, n-1, 1, s, dp);
