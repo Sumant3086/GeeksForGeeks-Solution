@@ -50,5 +50,5 @@
             minH.push({arr[ele.second][poin[ele.second]],ele.second});
             maxi=max(maxi,arr[ele.second][poin[ele.second]]);
         }
-        return ans;
+        return  ans;
     }
